@@ -12,7 +12,7 @@ export default function NewQuizForm() {
   const [topicId, setTopicId] = useState("");
   const history = useHistory();
   const topics = useSelector(selectTopics);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +23,17 @@ export default function NewQuizForm() {
     const cardIds = [];
 
     // create the new cards here and add each card's id to cardIds
+    console.log(topicId);
     // create the new quiz here
-    dispatch(addQuizAndQuizId({quizId:uuidv4(),name:name,topicId:topicId,cardIds:[]}))
+    dispatch(
+      addQuizAndQuizId({
+        id: uuidv4(),
+        name: name,
+        topicId: topicId,
+        cardIds: cardIds,
+      })
+    );
+    console.log(topicId);
 
     history.push(ROUTES.quizzesRoute());
   };
@@ -60,7 +69,6 @@ export default function NewQuizForm() {
           onChange={(e) => setTopicId(e.currentTarget.value)}
           placeholder="Topic"
         >
-          <option value="">Topic</option>
           {Object.values(topics).map((topic) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
