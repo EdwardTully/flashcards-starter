@@ -11,20 +11,19 @@ export const topicSlice = createSlice({
     reducers: {
         addTopic: (state, action)=>{
            // const { id, name, icon }= action.payload
-           console.log(action.payload.id)
+          
             state.topics[action.payload.id]={
                 id:action.payload.id,
                 name: action.payload.name,
                 icon: action.payload.icon,
                 quizIds: []
             }
-            console.log(state.topics)
+          
             
         },
         addQuizId: (state, action) =>{
-           const {id, topicId}= action.payload
-          
-            state.topics[topicId].quizIds.push(id)
+            const {topicId, quizId}= action.payload
+            state.topics[topicId].quizIds.push(quizId)
         }
     }
   

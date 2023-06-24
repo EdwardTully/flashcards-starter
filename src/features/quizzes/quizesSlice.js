@@ -14,21 +14,19 @@ const quizesSlice = createSlice({
         addQuiz: (state, action)=>{
         //const {id, name, topicId, cardIds} = action.payload
        
-        state.quizzes[action.payload.id]= {
-            id: action.payload.id,
-            name: action.payload.name,
-            topicId: action.payload.topicId,
-            cardIds: action.payload.cardIds,
-        }
+        state.quizzes[action.payload.quizId]= 
+            action.payload
+        
     }}
 })
 
 
 export const addQuizAndQuizId = (payload)=>{
-  
+    
     return (dispatch)=>{
         dispatch(addQuiz(payload))
-        dispatch(addQuizId({id:payload.id, topicId:payload.topicId} ))
+        const {quizId, topicId}= payload
+        dispatch(addQuizId(quizId, topicId))
     }
 }
 export const selectQuiz = (state)=>

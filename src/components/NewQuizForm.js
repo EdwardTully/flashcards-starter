@@ -22,18 +22,19 @@ export default function NewQuizForm() {
 
     const cardIds = [];
 
-    // create the new cards here and add each card's id to cardIds
-    console.log(topicId);
-    // create the new quiz here
+    let uniqueId = uuidv4()
+
+    const object = {
+      quizId: uniqueId,
+      name: name,
+      topicId: topicId,
+      cardIds: cardIds
+    }
+
     dispatch(
-      addQuizAndQuizId({
-        id: uuidv4(),
-        name: name,
-        topicId: topicId,
-        cardIds: cardIds,
-      })
+      addQuizAndQuizId(object)
     );
-    console.log(topicId);
+   
 
     history.push(ROUTES.quizzesRoute());
   };
@@ -71,7 +72,7 @@ export default function NewQuizForm() {
         >
           {Object.values(topics).map((topic) => (
             <option key={topic.id} value={topic.id}>
-              {topic.name}
+              {topic.name + topic.id}
             </option>
           ))}
         </select>
